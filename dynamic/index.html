@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select, button {
+            padding: 8px;
+            margin: 5px;
+        }
+        #batches, #students {
+            margin-top: 20px;
+        }
+        #batchList li, #studentList li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Student Management System</h1>
+
+<!-- Hub selection dropdown -->
+<h3>Select a Hub</h3>
+<select id="hubSelect" onchange="fetchBatches()">
+    <option value="">Select a hub</option>
+    <option value="BCK">Calicut</option>
+    <option value="BCE">Kochi</option>
+    <option value="BCT">Thiruvananthapuram</option>
+    <option value="BCB">Bangalore</option>
+    <option value="BCR">Remote</option>
+    <option value="BCCO">Coimbatore</option>
+    <option value="BCCH">Chennai</option>
+</select>
+
+<!-- Display batches after hub is selected -->
+<div id="batches" style="display: none;">
+    <h3>Batches</h3>
+    <ul id="batchList"></ul>
+</div>
+
+<!-- Display students in selected batch -->
+<div id="students" style="display: none;">
+    <h3>Students in Batch</h3>
+    <ul id="studentList"></ul>
+</div>
+
+<script>
+// Fetch batches based on the selected hub
+function fetchBatches() {
+    const hub = document.getElementById('hubSelect').value;
+    if (!hub) {
+        document.getElementById('batches').style.display = 'none';
+        document.getElementById('students').style.display = 'none';
+        return;
+    }
+    
+    // Show batches section
+    document.getElementById('batches').style.display = 'block';
+    
+    fetch(`/batches/${hub}/`)
+    .then(response => response.json())
+    .then(data => {
+        const batchList = document.getElementById('batchList');
+        batchList.innerHTML = '';  // Clear the batch list
+        data.batches.forEach(batch => {
+            const li = document.createElement('li');
+            li.textContent = `${batch.batch} - ${batch.student_count} students`;
+            li.onclick = () => fetchStudents(hub, batch.batch);
+            batchList.appendChild(li);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching batches:', error);
+    });
+}
+
+// Fetch students for a selected batch and hub
+function fetchStudents(hub, batch) {
+    // Show students section
+    document.getElementById('students').style.display = 'block';
+    
+    fetch(`/students/${hub}/${batch}/`)
+    .then(response => response.json())
+    .then(data => {
+        const studentList = document.getElementById('studentList');
+        studentList.innerHTML = '';  // Clear the student list
+        data.students.forEach(student => {
+            const li = document.createElement('li');
+            li.innerHTML = `${student.name} - ${student.phonenumber} <button onclick="makeCall('${student.phonenumber}')">Call</button>`;
+            studentList.appendChild(li);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching students:', error);
+    });
+}
+
+// Make a call to a student
+function makeCall(phoneNumber) {
+    fetch('/make_call/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'phone_number': phoneNumber })
+    })
+    .then(response => response.json())
+    .then(data => alert(data.message || data.error))
+    .catch(error => {
+        console.error('Error making call:', error);
+        alert('Error making call');
+    });
+}
+</script>
+
+</body>
+</html>

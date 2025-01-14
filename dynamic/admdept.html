@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Customer List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .customer-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .customer-card h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .customer-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .phone-row {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .phone-row img {
+            margin-left: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Employees</h2>
+
+        {% for i in emp %}
+        <div class="customer-card">
+            <h3>{{i.Name}}</h3>
+            <div class="phone-row">
+                <p>Phone Number: {{i.phonenumber}}</p>
+                <a href="tel:{{i.phonenumber}}" title="Call User">
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Call Icon">
+                </a>
+            </div>
+            <div class="phone-row">
+                <p>Designation: {{i.Designation}}</p>
+            </div>
+            <div class="phone-row">
+                <p>Work Location: {{i.Work_location}}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+           
+        </div>
+       
+</div>
+</body>
+</html>

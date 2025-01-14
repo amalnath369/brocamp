@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Resetting margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        a {
+            color: inherit; /* Makes the link color inherit the text color from the parent */
+            text-decoration: none; /* Removes underline */
+        }
+
+
+        /* Main container */
+        .main-container {
+            display: flex;
+            height: 100vh;
+            flex-direction: row;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: #1e2a3a;
+            width: 250px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .sidebar h2 {
+            color: white;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .sidebar a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin: 15px 0;
+            font-weight: 600;
+            width: 100%;
+            text-align: left;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .sidebar a:hover {
+            background-color: #3d4a5b;
+            color: white;
+        }
+
+        /* Main content area */
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-nav {
+            background-color: #fff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-nav .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-nav .user-info img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .top-nav .user-info span {
+            font-weight: 600;
+        }
+
+        /* Dashboard section */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .dashboard .card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .dashboard .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .dashboard .card p {
+            color: #888;
+        }
+
+        .dashboard .card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Media Query for Responsiveness */
+        @media screen and (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main container with Sidebar and Content -->
+    <div class="main-container">
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <a href="#">Users</a>
+            <a href="#">Settings</a>
+            <a href="{% url 'studform' %}">Student Register</a>
+            <a href="{% url 'empform' %}">Employee Register</a>
+            <a href="{% url 'admform' %}">Admin Register</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Top Navigation -->
+            <div class="top-nav">
+                <div class="logo"> Hi {{obj.name}}</div>
+                <div class="user-info">
+                    <span>Brocamp</span>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard">
+               <a href="{% url 'adminemp' %}">
+                <div class="card">
+                    <h3>Employee Data</h3>
+                </div>
+               </a>
+                <a href="{% url 'admstudent' %}">
+                    <div class="card">
+                        <h3>Student Data</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

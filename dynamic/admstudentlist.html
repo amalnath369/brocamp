@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Customer List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .customer-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .customer-card h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .customer-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .phone-row {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .phone-row img {
+            margin-left: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .actions {
+            margin-top: 10px;
+            text-align: right;
+        }
+        .actions a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Students</h2>
+
+        {% for i in student %}
+        <div class="customer-card">
+            <h3>{{i}}</h3>
+            <div class="phone-row">
+                <p>Phone Number: {{i.phonenumber}}</p>
+                <a href="tel:{{i.phonenumber}}" title="Call User">
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Call Icon">
+                </a>
+            </div>
+            <div class="phone-row">
+                <p>Guardian Name: {{i.guardianname}}</p>
+            </div>
+            <div class="phone-row">
+                <p>Guardian Phone: {{i.guardiannumber}}</p>
+                <a href="tel: {{i.guardiannumber}}" title="Call Guardian">
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Call Icon">
+                </a>
+            </div>
+            <div class="actions">
+                <a href="{% url 'edit' i %}" title="Edit Student">Edit</a>
+                <form method="POST" action="{% url 'delete' i %}" onsubmit="return confirm('Are you sure you want to delete this student?');">
+                    {% csrf_token %}
+                    <button type="submit" style="color: red; background: none; border: none; cursor: pointer;">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        
+</body>
+</html>

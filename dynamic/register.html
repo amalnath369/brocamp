@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+    </style>
+</head>
+<body>
+    <form id="studentRegForm">
+        <h2>Student Registration</h2>
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="text" id="hub" placeholder="Hub (e.g., BCK)" required>
+        <input type="text" id="batch" placeholder="Batch" required>
+        <input type="text" id="domain" placeholder="Domain" required>
+        <input type="text" id="studentPhone" placeholder="Student Phone" required>
+        <input type="text" id="guardianPhone" placeholder="Guardian Phone" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="mentorId" placeholder="Mentor ID" required>
+        <button type="submit">Register</button>
+    </form>
+    <script src="app.js"></script>
+</body>
+</html>

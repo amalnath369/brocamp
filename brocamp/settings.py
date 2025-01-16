@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'brocamp.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
+        'NAME': 'test',
         'USER': 'postgres',
         'PASSWORD': 'amal',
         'HOST': 'localhost',  # 'localhost' or remote PostgreSQL server
